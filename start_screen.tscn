@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvg3b7ws2mpny"]
+
+[ext_resource type="Script" path="res://StartScreen.gd" id="1_f0n57"]
+
+[sub_resource type="SystemFont" id="SystemFont_qx3m0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2lnt3"]
+font = SubResource("SystemFont_qx3m0")
+font_size = 128
+font_color = Color(0.988235, 0.992157, 0.996078, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_0eb8h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wg4lv"]
+font = SubResource("SystemFont_0eb8h")
+font_size = 64
+
+[node name="StartScreen" type="Node2D"]
+script = ExtResource("1_f0n57")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -76.0
+offset_top = -60.0
+offset_right = 1237.0
+offset_bottom = 733.0
+color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 170.0
+offset_top = 66.0
+offset_right = 1004.0
+offset_bottom = 289.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "RUN GAME"
+label_settings = SubResource("LabelSettings_2lnt3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 310.0
+offset_top = 286.0
+offset_right = 873.0
+offset_bottom = 377.0
+text = "Hit SPACE to start."
+label_settings = SubResource("LabelSettings_wg4lv")
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 301.0
+offset_top = 415.0
+offset_right = 864.0
+offset_bottom = 597.0
+text = "[SPACE] to jump.
+[v] to small jump."
+label_settings = SubResource("LabelSettings_wg4lv")
+
+[node name="MarqueeTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="MarqueeTimer" to="." method="_on_marquee_timer_timeout"]

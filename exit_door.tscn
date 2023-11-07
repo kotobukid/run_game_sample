@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://chlmmtlt3n20o"]
+
+[ext_resource type="Texture2D" uid="uid://dbekccnupuejn" path="res://object.png" id="1_ycy31"]
+[ext_resource type="Script" path="res://exit_door.gd" id="1_ypxvn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8qix"]
+size = Vector2(10, 14)
+
+[node name="ExitDoor" type="Area2D" groups=["exit"]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_ypxvn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_f8qix")
+debug_color = Color(0.8, 0.411765, 0.254902, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = ExtResource("1_ycy31")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)

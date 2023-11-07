@@ -6,7 +6,8 @@ const JUMP_VELOCITY = -400.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-signal touched_to_exit(body)
+signal touched_to_exit(body, stage_number)
+signal coin_got
 
 func _ready():
 	_draw_trajectory()
@@ -63,4 +64,7 @@ func _physics_process(delta):
 
 func _on_event_area_area_entered(area):
 	if area.is_in_group("exit"):
-		emit_signal("touched_to_exit", area)
+		emit_signal("touched_to_exit", area, area.next_stage)
+
+func emit_coin():
+	emit_signal("coin_got")

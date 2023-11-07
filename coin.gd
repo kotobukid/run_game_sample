@@ -1,5 +1,4 @@
 extends Area2D
-signal coin_got
 
 func _ready():
 	$AnimatedSprite2D.play("default")
@@ -13,13 +12,12 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.name == "Player":
 		call_deferred("disable_collision")
+		body.emit_coin()
 
 func disable_collision():
 	$CollisionShape2D.disabled = true
 	$AnimationPlayer.play("disappear")
-	emit_signal("coin_got")
 	$Timer.start(1.5)
-
 
 
 func _on_timer_timeout():
