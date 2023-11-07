@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2ogyqsp5xwpg"]
+
+[ext_resource type="Shader" path="res://iris_out.gdshader" id="1_kv5qm"]
+[ext_resource type="Script" path="res://iris_out.gd" id="1_q6s56"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekd1t"]
+shader = ExtResource("1_kv5qm")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.464
+
+[sub_resource type="Animation" id="Animation_irni3"]
+resource_name = "IrisOut"
+length = 2.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.89072),
+"transitions": PackedFloat32Array(1, 0.032352),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ymstq"]
+resource_name = "IrisOutRelease"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0406696, 0.779067),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_m70vx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.464]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bn6v8"]
+_data = {
+"IrisOut": SubResource("Animation_irni3"),
+"IrisOutRelease": SubResource("Animation_ymstq"),
+"RESET": SubResource("Animation_m70vx")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_q6s56")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ekd1t")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1671.0
+offset_top = -1666.0
+offset_right = 129.0
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.85209, 1.85209)
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bn6v8")
+}

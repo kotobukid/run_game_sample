@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://ceg35vu50l2ru"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_l25q7"]
+[ext_resource type="Texture2D" uid="uid://cnt58o36fjkgq" path="res://player.png" id="2_g56p4"]
+
+[sub_resource type="Curve" id="Curve_volcp"]
+_data = [Vector2(0, 0.284211), 0.0, 0.0, 0, 0, Vector2(0.481481, 0.536842), 0.0, 0.0, 0, 0, Vector2(0.993827, 0.0210526), -0.509034, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb4sw"]
+atlas = ExtResource("2_g56p4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdn2w"]
+atlas = ExtResource("2_g56p4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7i6h3"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_wb4sw")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_hdn2w")
+}],
+"loop": true,
+"name": &"run",
+"speed": 24.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mpp4"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e8tti"]
+radius = 10.8041
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_l25q7")
+
+[node name="TrajectoryLine" type="Line2D" parent="."]
+position = Vector2(-2, 0)
+width = 5.0
+width_curve = SubResource("Curve_volcp")
+default_color = Color(0.956863, 0.576471, 1, 0.388235)
+
+[node name="TrajectoryLineMirror" type="Line2D" parent="."]
+position = Vector2(-2, 0)
+width = 5.0
+width_curve = SubResource("Curve_volcp")
+default_color = Color(0.945098, 0.588235, 1, 0.505882)
+
+[node name="AnimationSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.204, 1.204)
+sprite_frames = SubResource("SpriteFrames_7i6h3")
+animation = &"run"
+frame_progress = 0.53567
+
+[node name="PhysicalCollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_5mpp4")
+
+[node name="EventArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="EventCollisionShape2D" type="CollisionShape2D" parent="EventArea"]
+shape = SubResource("CircleShape2D_e8tti")
+debug_color = Color(0.654902, 0.376471, 0.898039, 0.419608)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(12, 1)
+collision_mask = 4
+
+[connection signal="area_entered" from="EventArea" to="." method="_on_event_area_area_entered"]
