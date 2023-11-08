@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcc5nlhjg6mnh"]
+[gd_scene load_steps=13 format=3 uid="uid://dcc5nlhjg6mnh"]
 
 [ext_resource type="Texture2D" uid="uid://bxpq8tky8i4v6" path="res://assets/coin/0001.png" id="1_dn2rk"]
 [ext_resource type="Script" path="res://coin.gd" id="1_th2pg"]
@@ -39,44 +39,60 @@ radius = 13.0384
 
 [sub_resource type="Animation" id="Animation_585ka"]
 resource_name = "disappear"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.98),
-"transitions": PackedFloat32Array(1, 0.0743254, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -30), Vector2(0, -30)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.9),
+"times": PackedFloat32Array(0, 0.35, 0.86),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0.54902), Color(0.621524, 0.621524, 0.621524, 1), Color(0, 0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 0.707107),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_uq0wu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bg5e4"]
 _data = {
+"RESET": SubResource("Animation_uq0wu"),
 "disappear": SubResource("Animation_585ka")
 }
 
 [node name="Coin" type="Area2D"]
-modulate = Color(1, 1, 1, 0.54902)
-position = Vector2(0, -12)
+position = Vector2(0, -24)
 collision_layer = 16
 script = ExtResource("1_th2pg")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
 sprite_frames = SubResource("SpriteFrames_6l0rc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["coin"]]

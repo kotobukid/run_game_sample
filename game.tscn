@@ -14,11 +14,18 @@ font = SubResource("SystemFont_ignfl")
 [node name="Game" type="Node"]
 script = ExtResource("1_g5fwx")
 
+[node name="Timer" parent="." instance=ExtResource("3_j25h7")]
+
+[node name="Stages" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_lb2r1")]
+position = Vector2(564, 343)
+
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 965.0
-offset_top = 63.0
-offset_right = 1027.0
-offset_bottom = 97.0
+offset_left = 1031.0
+offset_top = 46.0
+offset_right = 1093.0
+offset_bottom = 80.0
 color = Color(0.156863, 0.156863, 0.156863, 1)
 
 [node name="CoinCount" type="Label" parent="ColorRect"]
@@ -34,14 +41,8 @@ vertical_alignment = 1
 [node name="Coin" parent="ColorRect" instance=ExtResource("6_5v5ho")]
 position = Vector2(18, 16)
 
-[node name="Player" parent="." instance=ExtResource("1_lb2r1")]
-position = Vector2(5, 368)
-
-[node name="Stages" type="Node2D" parent="."]
-
-[node name="Timer" parent="." instance=ExtResource("3_j25h7")]
-
 [node name="StartScreen" parent="." instance=ExtResource("4_12a7g")]
 
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="coin_got" from="Player" to="." method="_on_coin_coin_got"]
 [connection signal="start_stage" from="StartScreen" to="." method="_on_start_screen_start_stage"]

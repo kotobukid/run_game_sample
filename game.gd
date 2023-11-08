@@ -18,10 +18,6 @@ func _ready():
 	add_child(iris_out)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func start_stage(stage_number):
 	for child in $Stages.get_children():
 		child.queue_free()
@@ -47,9 +43,9 @@ func _on_player_touched_to_exit(area, stage_number):
 	timer.wait_time = 2.0
 	timer.process_mode = Node.PROCESS_MODE_ALWAYS
 	timer.one_shot = true
-	add_child(timer)
+	# add_child(timer)
 	timer.next_stage = stage_number
-	timer.connect("timeout",Callable(self, "_on_timer_timeout"))
+	# timer.connect("timeout",Callable(self, "_on_timer_timeout"))
 
 	var sprite_size = Vector2(0, 0)
 	var sprite = area.get_node("Sprite2D")
